@@ -136,22 +136,7 @@ public class datos {
 		JButton btnBorrar = new JButton("borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int id = Integer.parseInt(txtmatricula.getText());
-				 try {
-					 Class.forName("com.msql.jdbc.Driver");
 				
-					 java.sql.Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad","root","");
-					 
-					 String query = "Delete from alumnos Where matricula="+id;
-					statement.executeUpdate(query);
-					 
-					 conexion.close();
-				 }
-				 catch (ClassNotFoundException el) {
-					 el.printStackTrace();
-				 }catch (SQLException el) {
-					 el.printStackTrace();
-				 }
 			}
 		});
 		btnBorrar.setBounds(156, 194, 89, 23);

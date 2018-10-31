@@ -18,7 +18,7 @@ public class datos {
 	private JFrame frame;
 	private JTextField txtnombre;
 	private JTextField txtmatricula;
-	private JLabel lblN;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -68,7 +68,7 @@ public class datos {
 					if (conexion != null) {
 						Statement st = conexion.createStatement();
 						
-						lblN.setText("conexion bn");
+						lblNewLabel.setText("conexion bn");
 					}else 
 						System.out.println("falla. ");
 					}
@@ -94,9 +94,7 @@ public class datos {
 					String nombre = txtnombre.getText();
 					((java.sql.Statement)statement).executeUpdate("insert into alumnos(nombre) values ('"+nombre+"')");
 					conexion.close();
-					
-					}
-				 catch (ClassNotFoundException o) {
+				} catch (ClassNotFoundException o) {
 					o.printStackTrace();
 				} catch (SQLException l) {
 					l.printStackTrace();
@@ -117,15 +115,12 @@ public class datos {
 					ResultSet resultSet = statement.executeQuery("Select nombre  from alumnos where matricula="+id);
 					
 					if(resultSet.next() == true) {
-						lblN.setText(resultSet.getString("nombre"));
+						txtnombre.setText(resultSet.getString("nombre"));
 					}
 					conexion.close();
 				} catch (ClassNotFoundException el) {
-					//TODO Auto-generated catch block 
 					el.printStackTrace();
-					
 				} catch (SQLException el) {
-					//TODO Auto-generated catch block 
 					el.printStackTrace();
 				}
 			}
@@ -136,22 +131,7 @@ public class datos {
 		JButton btnBorrar = new JButton("borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int id = Integer.parseInt(txtmatricula.getText());
-				 try {
-					 Class.forName("com.msql.jdbc.Driver");
 				
-					 java.sql.Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad","root","");
-					 
-					 String query = "Delete from alumnos Where matricula="+id;
-					statement.executeUpdate(query);
-					 
-					 conexion.close();
-				 }
-				 catch (ClassNotFoundException el) {
-					 el.printStackTrace();
-				 }catch (SQLException el) {
-					 el.printStackTrace();
-				 }
 			}
 		});
 		btnBorrar.setBounds(156, 194, 89, 23);
@@ -170,8 +150,8 @@ public class datos {
 		lblMatricula.setBounds(49, 114, 46, 14);
 		frame.getContentPane().add(lblMatricula);
 		
-		lblN = new JLabel("New label");
-		lblN.setBounds(126, 239, 227, 70);
-		frame.getContentPane().add(lblN);
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(126, 239, 227, 70);
+		frame.getContentPane().add(lblNewLabel);
 	}
 }
